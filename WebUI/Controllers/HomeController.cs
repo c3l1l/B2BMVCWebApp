@@ -1,4 +1,6 @@
-﻿using Core.ViewModels;
+﻿using AutoMapper;
+using Core.Services;
+using Core.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebUI.Models;
@@ -8,18 +10,27 @@ namespace WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, IMapper mapper)
         {
             _logger = logger;
+            _productService = productService;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+           
+            return View(await _productService.GetProductsWithCategory());
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public  IActionResult AdminPanel()
         {
             return View();
         }

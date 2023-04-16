@@ -1,8 +1,21 @@
-﻿@{
+﻿@model List<ProductWithCategoryVM>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-1">
+           @foreach(var item in Model) {
+            <div class="card float-md-start mx-3 my-3" style="width: 18rem;">
+                <img src="images/olives.jpg" class="card-img-top" alt="...">
+                <div class="card-body ">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Price.</p>
+                    <a asp-controller="Basket" class="btn btn-primary">ADD TO CART</a>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
 </div>

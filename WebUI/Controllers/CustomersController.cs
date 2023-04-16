@@ -30,7 +30,7 @@ namespace WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Save(CustomerVM customerVM)
+        public async Task<IActionResult> Save(CustomerSaveVM customerVM)
         {
             if (!ModelState.IsValid)
             {
