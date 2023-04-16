@@ -1,0 +1,24 @@
+﻿
+@model CategoryVM
+
+
+<h4>Update Category</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <form method="post" asp-controller="Categories" asp-action="Update">
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Category Name</label>
+                    <input type="text" class="form-control" asp-for="Name" id="categoryName" placeholder="Categories Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a asp-controller="Categories" asp-action="Index" class="btn btn-primary">Back</a>
+
+            </form>
+        </div>
+    </div>
+</div>

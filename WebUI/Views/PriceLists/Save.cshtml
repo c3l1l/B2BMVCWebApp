@@ -1,0 +1,29 @@
+﻿
+@model PriceListVM
+
+
+<h4>Save Price List</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <form method="post" asp-controller="PriceLists" asp-action="Save">
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Price List Name</label>
+                    <input type="text" class="form-control" asp-for="Name" id="priceListName" placeholder="Price List Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">PriceList Discount</label>
+                    <input type="number" class="form-control" asp-for="Discount" id="discount" placeholder="Discount">
+                    <span asp-validation-for="Discount" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-controller="PriceLists" asp-action="Index" class="btn btn-primary">Back</a>
+
+            </form>
+        </div>
+    </div>
+</div>

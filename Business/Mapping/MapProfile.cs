@@ -17,6 +17,7 @@ namespace Business.Mapping
             CreateMap<Product, ProductVM>().ReverseMap();
             CreateMap<Category,CategoryVM>().ReverseMap();
             CreateMap<Product,ProductWithCategoryVM>().ReverseMap();
+            CreateMap<PriceList,PriceListVM>().ReverseMap();    
 
         }
     }

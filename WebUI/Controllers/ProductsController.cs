@@ -37,9 +37,6 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ProductVM productVm)
         {
-            //var categories = await _categoryService.GetAllAsync();
-            //var categoriesVM = _mapper.Map<List<CategoryVM>>(categories);
-            //ViewBag.Categories = new SelectList(categoriesVM, "Id", "Name");
             if (!ModelState.IsValid)
             {
                 await GetCategoriesAndViewBag();
