@@ -14,6 +14,7 @@ using Core.Services;
 using Business.Services;
 using Core.UnitOfWorks;
 using DataAccess.UnitOfWork;
+using WEBUI.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,9 +37,11 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
     });
 });
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<ProductVMValidator>());
 

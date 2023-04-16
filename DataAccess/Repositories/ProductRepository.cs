@@ -1,6 +1,7 @@
 ﻿using Core.Models;
 using Core.Repositories;
 using DataAccess.DbContexts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace DataAccess.Repositories
         {
         }
 
-        public Task<List<Product>> GetProductsWithCategory()
+        public async Task<List<Product>> GetProductsWithCategory()
         {
-            throw new NotImplementedException();
+            return await _context.Products.Include(x=>x.Category).ToListAsync();
         }
     }
 }

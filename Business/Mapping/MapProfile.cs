@@ -15,6 +15,8 @@ namespace Business.Mapping
         {
             // CreateMap<Movie, MovieDto>().ReverseMap();
             CreateMap<Product, ProductVM>().ReverseMap();
+            CreateMap<Category,CategoryVM>().ReverseMap();
+            CreateMap<Product,ProductWithCategoryVM>().ReverseMap();
 
         }
     }

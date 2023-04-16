@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Business.Validations
 {
-    public class ProductVMValidator:AbstractValidator<ProductVM>
+    public class ProductWithCategoryVMValidator:AbstractValidator<ProductWithCategoryVM>
     {
-        public ProductVMValidator()
+        public ProductWithCategoryVMValidator()
         {
             RuleFor(x => x.Name).NotNull().WithMessage("{PropertyName} is required").NotEmpty().WithMessage("{PropertyName} is required");
-            
+            RuleFor(x => x.CategoryId).NotNull().WithMessage("{PropertyName} is required").NotEmpty().WithMessage("{PropertyName} is required");
         }
     }
 }

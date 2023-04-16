@@ -54,7 +54,7 @@ namespace Business.Services
                // throw new NotFoundException($"{typeof(T).Name} ({id}) not found");
             }
             return hasProduct;
-            // return await _repository.GetByIdAsync(id);
+            
         }
 
         public async Task RemoveAsync(T entity)

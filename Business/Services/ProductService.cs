@@ -22,9 +22,11 @@ namespace Business.Services
             _mapper = mapper;
         }
 
-        public Task<List<ProductWithCategoryVM>> GetProductsWithCategory()
+        public async Task<List<ProductWithCategoryVM>> GetProductsWithCategory()
         {
-            throw new NotImplementedException();
+            var products= await _productRepository.GetProductsWithCategory();
+            var productsVM=_mapper.Map<List<ProductWithCategoryVM>>(products);
+            return productsVM;  
         }
     }
 }
