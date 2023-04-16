@@ -8,12 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using WebUI.Modules;
 using Business.Validations;
+using Core.Repositories;
+using DataAccess.Repositories;
+using Core.Services;
+using Business.Services;
+using Core.UnitOfWorks;
+using DataAccess.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
+
+builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IGenericService<>),typeof(GenericService<>));
+//builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IProductService, ProductService>();  
+builder.Services.AddScoped<IProductRepository, ProductRepository>();  
+
+
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
