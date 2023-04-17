@@ -6,5 +6,5 @@ Entity Framework Core Code First
 Automapper
 Autofac
 Fluent Validation
-Microsoft Identity
+Microsoft Identity   
 </pre>
