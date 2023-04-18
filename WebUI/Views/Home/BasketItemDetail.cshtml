@@ -1,0 +1,32 @@
+﻿@model BasketItem
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<h4>Add Product To Cart</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" asp-controller="Basket" asp-action="GetCartItem" >
+                <input type="hidden" value="" asp-for="BasketId" class="hidden" />
+                <div class="mb-3">
+                    <label asp-for="Product.Name" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" asp-for="Product.Name" id="productName" placeholder="Product Name">
+                    <span asp-validation-for="Product.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Quantity" class="form-label">Quantity</label>
+                    <input type="number" min="1" max="100" class="form-control" asp-for="Quantity" id="quantity" placeholder="Quantity">
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.Price" class="form-label">Product Price</label>
+                    <span> <input disabled type="text"  class="form-control" asp-for="Product.Price" id="productPrice" placeholder="Price"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Add To Cart</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Back</a>
+
+            </form>
+        </div>
+    </div>
+</div>

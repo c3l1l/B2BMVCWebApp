@@ -9,9 +9,9 @@ namespace Core.ViewModels
 {
     public class BasketVM:BaseVM
     {
-        public int CustomerId { get; set; }
-        public CustomerVM Customer { get; set; }
-        public  List<BasketItem>  BasketItems { get; set; }
+        public int? CustomerId { get; set; }
+        public string AppUserId { get; set; }
+        public  List<BasketItem>?  BasketItems { get; set; }
 
     }
 }

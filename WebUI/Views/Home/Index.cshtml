@@ -1,20 +1,31 @@
 ﻿@model List<ProductWithCategoryVM>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Home Page";
 }
-
+<p>Username: @User.Identity?.Name</p>
+<p>Username: @UserManager.GetUserId(User)</p>
 <div class="container">
     <div class="row">
         <div class="col-md-10 offset-1">
-           @foreach(var item in Model) {
-            <div class="card float-md-start mx-3 my-3" style="width: 18rem;">
-                <img src="images/olives.jpg" class="card-img-top" alt="...">
-                <div class="card-body ">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Price.</p>
-                    <a asp-controller="Basket" class="btn btn-primary">ADD TO CART</a>
+            @foreach (var item in Model)
+            {
+                <div class="card float-md-start mx-3 my-3" style="width: 18rem;">
+                    <img src="images/olives.jpg" class="card-img-top" alt="...">
+                    <div class="card-body ">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Price.</p>
+                        @*<a asp-controller="Basket" asp-action="GetCartItem" asp-route-id="@UserManager.GetUserId(User)" class="btn btn-primary">ADD TO CART</a>*@
+                        <form as-conroller="Home" asp-action="BasketItemDetail" method="Post">
+                            <input type="hidden" name="appUserId" value="@UserManager.GetUserId(User)" />
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger">Add To Cart</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+                
             }
         </div>
     </div>

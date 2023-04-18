@@ -1,6 +1,7 @@
 ﻿using Core.Models;
 using Core.Repositories;
 using DataAccess.DbContexts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace DataAccess.Repositories
     {
         public BasketRepository(AppDbContext context) : base(context)
         {
+        }
+
+        public async Task<Basket> GetBasketByUserId(string userId)
+        {
+            return await _context.Baskets.FirstOrDefaultAsync(b => b.AppUserId == userId);
         }
     }
 }

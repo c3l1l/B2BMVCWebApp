@@ -30,10 +30,16 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CustomerId");
 
@@ -139,11 +145,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("PasswordSalt")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
@@ -411,15 +415,15 @@ namespace DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fbe84213-ad56-4005-84f8-3e85ad750c56",
-                            ConcurrencyStamp = "eeaf1dae-3159-4c1a-9353-1496f77f9192",
+                            Id = "f3060030-8db9-4c34-b61d-390a2c440885",
+                            ConcurrencyStamp = "e4181c83-92bf-4369-b59f-7c7502ca7846",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "def64512-9bf3-4c8b-a765-829130764608",
-                            ConcurrencyStamp = "a8acc824-2731-4254-8da2-d4146dd1aa5d",
+                            Id = "cc9ef416-a374-4452-b41c-5e11bd4e3787",
+                            ConcurrencyStamp = "d093e04b-7ebc-4e86-b857-adcae0b09302",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -460,6 +464,10 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -513,6 +521,8 @@ namespace DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -615,13 +625,40 @@ namespace DataAccess.Migrations
                     b.ToTable("PriceListProduct");
                 });
 
+            modelBuilder.Entity("Core.Models.AppUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("AppUser");
+                });
+
             modelBuilder.Entity("Core.Models.Basket", b =>
                 {
+                    b.HasOne("Core.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Customer");
                 });

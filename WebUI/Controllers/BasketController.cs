@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Models;
 using Core.Services;
 using Core.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -24,5 +25,11 @@ namespace WebUI.Controllers
         {
             return null;
         }
+        public IActionResult GetCartItem(BasketItem item)
+        {
+            
+            return null;
+        }
+        
     }
 }

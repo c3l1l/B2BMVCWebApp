@@ -9,5 +9,6 @@ namespace Core.Repositories
 {
     public interface IBasketRepository:IGenericRepository<Basket>
     {
+        Task<Basket> GetBasketByUserId(string userId);
     }
 }

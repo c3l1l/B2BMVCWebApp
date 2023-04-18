@@ -9,5 +9,7 @@ namespace Core.Services
 {
     public interface IBasketService:IGenericService<Basket>
     {
+        Task<Basket> GetBasketByUserId(string userId);
+
     }
 }

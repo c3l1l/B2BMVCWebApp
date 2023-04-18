@@ -14,7 +14,7 @@ namespace Business.Services
     public class GenericService<T> : IGenericService<T> where T : class
     {
         private readonly IGenericRepository<T> _repository;
-        private readonly IUnitOfWork _unitOfWork;
+        protected readonly IUnitOfWork _unitOfWork;
 
         public GenericService(IGenericRepository<T> repository, IUnitOfWork unitOfWork)
         {
