@@ -1,6 +1,9 @@
 ﻿@using System.Text.RegularExpressions
 @model List<BasketItemVM>
-
+@{ 
+    decimal subtotal = 0;
+    decimal totalItemQuantity = 0;
+}
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -21,9 +24,10 @@
                         <td step="0.01">
                             @{
                                 var totalPrice = item.Quantity * item.Product.Price;
-
+                                totalItemQuantity += item.Quantity;
                             }
                             @totalPrice.ToString("0.00") TL
+                            @{ subtotal += totalPrice;}
                         </td>
                         <td>
                             <a class="btn btn-danger" asp-action="Remove" asp-controller="Basket" asp-route-id="@item.Id">
@@ -34,7 +38,7 @@
                 }
             <tr>
                 <td colspan="4">
-                    <a asp-action="" asp-controller="" asp-route-id="" class="btn btn-outline-info">Continue Shopping</a>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info">Continue Shopping</a>
                     
                     @if (Model.Count >= 1)
                     {
@@ -49,8 +53,10 @@
             <table class="table">
                 <tbody>
                     <tr><td><strong class="fs-4">Order Summary</strong></td> </tr>
-                    <tr><td><p class="fw-semibold text-danger fs-6"> Total Quantity of Orders (12 items) </p></td> </tr>
-                    <tr><td><p class="fw-semibold text-danger fs-6"> Subtotal: 122 TL</p></td></tr>
+                    <tr><td><p class="fw-semibold text-danger fs-6"> Total Quantity of Orders (@Convert.ToInt32(totalItemQuantity) items) </p></td> </tr>
+                    <tr><td><p class="fw-semibold text-danger fs-6"> Subtotal: @subtotal.ToString("0.00") TL
+                        
+                        </p></td></tr>
                     
                     <tr><td><a class="btn btn-outline-success">CONFIRM ORDER AND CHECKOUT</a></td></tr>
                     
