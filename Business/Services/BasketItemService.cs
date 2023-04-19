@@ -38,5 +38,11 @@ namespace Business.Services
             }
             return true;
         }
+
+        public async Task<List<BasketItemVM>> GetBasketItemsWithProductByBasketId(int basketId)
+        {
+            var basketItems=await _basketItemRepository.GetBasketItemsWithProductByBasketId(basketId);
+            return _mapper.Map<List<BasketItemVM>>(basketItems);
+        }
     }
 }

@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <form method="post" asp-controller="BasketItem" asp-action="BasketItemDetail">
+            <form method="post" asp-controller="Basket" asp-action="AddProductToBasket">
 
                 <div class=" from-group row">
                     <label asp-for="Product.Name" class="col-form-label col-sm-2">Product</label>
@@ -29,8 +29,8 @@
                         <span> <input readonly type="text" class="form-control-plaintext" value="@Model.Product.Price" id="productPrice" placeholder="Price"></span>
                     </div>
                 </div>
-                <input type="hidden"  name="BasketId" value="@Model.BasketId"  class="hidden" />
-                <input type="hidden"  name="ProductId" value="@Model.Product.Id" class="hidden" />
+                <input type="hidden" name="BasketId" value="@Model.BasketId" class="hidden" />
+                <input type="hidden" name="ProductId" value="@Model.Product.Id" class="hidden" />
                 <input type="hidden" name="appUserId" value="@UserManager.GetUserId(User)" />
                 <button type="submit" class="btn btn-primary">Add To Cart</button>
                 <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Back</a>

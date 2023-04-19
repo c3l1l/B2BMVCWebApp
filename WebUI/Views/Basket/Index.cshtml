@@ -1,0 +1,54 @@
+﻿@using System.Text.RegularExpressions
+@model List<BasketItemVM>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-hover">
+                <thead>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Action</th>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Product.Name </td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Product.Price TL</td>
+                        <td step="0.01">
+                            @{
+                                var totalPrice = item.Quantity * item.Product.Price;
+
+                            }
+                            @totalPrice.ToString("0.00") TL
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" asp-action="Remove" asp-controller="Basket" asp-route-id="@item.Id">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-md-4">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <tr><td>Order Summary</td> </tr>
+                        <tr><td>Total Quantity of Orders</td></tr>
+                        <tr><td>12 Product </td></tr>
+                        <tr><td>Total Order Amount</td></tr>
+                        <tr><td>122TL</td></tr>
+                        <tr><td><a class="btn btn-info">Confirm Order And Buy</a></td></tr>
+                    </tr>
+                </tbody>
+                    </table>
+
+        </div>
+    </div>
+</div>
+
+
+

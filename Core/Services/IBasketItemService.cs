@@ -11,5 +11,6 @@ namespace Core.Services
     public interface IBasketItemService:IGenericService<BasketItem>
     {
         Task<bool> CheckBasketItemPropertiesOnDB(BasketItemVM basketItemVM);
+        Task<List<BasketItemVM>> GetBasketItemsWithProductByBasketId(int basketId);
     }
 }
