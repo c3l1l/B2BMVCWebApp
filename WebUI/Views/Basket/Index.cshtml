@@ -26,15 +26,20 @@
                             @totalPrice.ToString("0.00") TL
                         </td>
                         <td>
-                            <a class="btn btn-danger" asp-action="Remove" asp-controller="Basket" asp-route-id="@item.Id">Remove</a>
+                            <a class="btn btn-danger" asp-action="Remove" asp-controller="Basket" asp-route-id="@item.Id">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 }
             <tr>
                 <td colspan="4">
                     <a asp-action="" asp-controller="" asp-route-id="" class="btn btn-outline-info">Continue Shopping</a>
-                    <a asp-action="" asp-controller="" asp-route-id="" class="btn btn-outline-danger ms-2">Empty The Basket</a>
-
+                    
+                    @if (Model.Count >= 1)
+                    {
+                        <a asp-action="DeleteTheBasket" asp-controller="Basket" asp-route-id="@Model.FirstOrDefault().BasketId" class="btn btn-outline-danger ms-2">Empty The Basket</a>
+                    }
                 </td> 
                
             </tr>

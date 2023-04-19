@@ -28,7 +28,6 @@ namespace WebUI.Controllers
         {
             
             var basket = await _basketService.GetBasketByUserId(userId);
-            var itemCount=await _basketItemService.GetBasketItemsCountByUserId(userId);
             var basketItems=await _basketItemService.GetBasketItemsWithProductByBasketId(basket.Id);
             return View(_mapper.Map<List<BasketItemVM>>(basketItems));
         }
@@ -71,6 +70,14 @@ namespace WebUI.Controllers
             await _basketItemService.RemoveAsync(basketItem);
             return RedirectToAction("Index", "Basket", new {userId=userId});
         }
+        public async Task<IActionResult> DeleteTheBasket(int id)
+        {
+            var basket = await _basketService.GetByIdAsync(id);
+            var basketItems = await _basketItemService.Where(b=>b.BasketId==id).ToListAsync();
+            await _basketItemService.RemoveRangeAsync(basketItems);
+            return RedirectToAction("Index", "Basket", new { userId = basket.AppUserId });
+        }
+
 
         [NonAction]
         public async Task<string> getUserIdByBasketItemId(int basketItemId)

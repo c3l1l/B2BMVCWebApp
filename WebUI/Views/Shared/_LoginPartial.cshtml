@@ -17,11 +17,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="btn btn-primary" asp-action="Index" asp-controller="Basket" asp-route-userId="@UserManager.GetUserId(User)">
+            <a class="btn btn-warning" asp-action="Index" asp-controller="Basket" asp-route-userId="@UserManager.GetUserId(User)">
                 @{
                     var itemcount = await basketItemService.GetBasketItemsCountByUserId(UserManager.GetUserId(User));
                 }
-                Shopping Basket<span class="badge bg-light text-black"> @itemcount</span>
+                <i class="fa-solid fa-cart-shopping fa-xl"></i>
+                <span class="badge bg-light text-black"> @itemcount</span>
             </a>
         </li>
 
