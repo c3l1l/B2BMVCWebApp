@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230417085314_user-basket-relations")]
-    partial class userbasketrelations
+    [Migration("20230418082226_basket-user-relations")]
+    partial class basketuserrelations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,8 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -417,15 +418,15 @@ namespace DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f3060030-8db9-4c34-b61d-390a2c440885",
-                            ConcurrencyStamp = "e4181c83-92bf-4369-b59f-7c7502ca7846",
+                            Id = "2680fe47-8b00-4229-ac75-62f62b3e2bd9",
+                            ConcurrencyStamp = "2ee358f1-e924-403d-ad52-d89ed73fc9f6",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "cc9ef416-a374-4452-b41c-5e11bd4e3787",
-                            ConcurrencyStamp = "d093e04b-7ebc-4e86-b857-adcae0b09302",
+                            Id = "52312592-430f-4011-afa2-d162d29e6aef",
+                            ConcurrencyStamp = "7975b000-8262-4260-af8f-d1e8fd69796c",
                             Name = "user",
                             NormalizedName = "USER"
                         });

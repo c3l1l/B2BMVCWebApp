@@ -37,21 +37,6 @@ namespace WebUI.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> BasketItemDetail(string appUserId,int productId) {
-
-            if (appUserId!=null)
-            {
-                var basket = await _basketService.GetBasketByUserId(appUserId);
-                var basketItem = new BasketItem();
-                basketItem.BasketId = basket.Id;
-                basketItem.ProductId = productId;
-                basketItem.Product = await _productService.GetByIdAsync(productId);
-               // return View(_mapper.Map<BasketItemVM>(basketItem));
-                return View(basketItem);
-            }
-            return RedirectToAction("Index");
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(ErrorVM errorVM)

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccess.Migrations
 {
-    public partial class userbasketrelations : Migration
+    public partial class basketuserrelations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,12 +79,12 @@ namespace DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "cc9ef416-a374-4452-b41c-5e11bd4e3787", "d093e04b-7ebc-4e86-b857-adcae0b09302", "user", "USER" });
+                values: new object[] { "2680fe47-8b00-4229-ac75-62f62b3e2bd9", "2ee358f1-e924-403d-ad52-d89ed73fc9f6", "admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f3060030-8db9-4c34-b61d-390a2c440885", "e4181c83-92bf-4369-b59f-7c7502ca7846", "admin", "ADMIN" });
+                values: new object[] { "52312592-430f-4011-afa2-d162d29e6aef", "7975b000-8262-4260-af8f-d1e8fd69796c", "user", "USER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_AppUserId",
@@ -113,12 +113,12 @@ namespace DataAccess.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "cc9ef416-a374-4452-b41c-5e11bd4e3787");
+                keyValue: "2680fe47-8b00-4229-ac75-62f62b3e2bd9");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "f3060030-8db9-4c34-b61d-390a2c440885");
+                keyValue: "52312592-430f-4011-afa2-d162d29e6aef");
 
             migrationBuilder.DropColumn(
                 name: "Password",

@@ -24,16 +24,29 @@ namespace Business.Services
         public async Task<Basket> GetBasketByUserId(string userId)
         {
             var basket=await _basketRepository.GetBasketByUserId(userId);
-            if (basket==null)
-            {
-                var newBasket=new Basket();
-                newBasket.AppUserId=userId;
-                await _basketRepository.AddAsync(newBasket);
-                await _unitOfWork.CommitAsync();
+            if (basket == null)
+                return await CreateNewBasket(userId);
+            //{
+            //    var newBasket=new Basket();
+            //    newBasket.AppUserId=userId;
+            //    newBasket.CustomerId = 0;
+            //    await _basketRepository.AddAsync(newBasket);
+            //    await _unitOfWork.CommitAsync();
                  
-                return newBasket;
-            }
+            //    return newBasket;
+            //}
             return basket;
+        }
+        public async Task<Basket> CreateNewBasket(string userId)
+        {
+
+            var newBasket = new Basket();
+            newBasket.AppUserId = userId;
+            newBasket.CustomerId = 0;
+            await _basketRepository.AddAsync(newBasket);
+            await _unitOfWork.CommitAsync();
+
+            return newBasket;
         }
     }
 }

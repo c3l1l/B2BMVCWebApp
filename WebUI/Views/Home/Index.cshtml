@@ -18,7 +18,7 @@
                         <h5 class="card-title">@item.Name</h5>
                         <p class="card-text">@item.Price.</p>
                         @*<a asp-controller="Basket" asp-action="GetCartItem" asp-route-id="@UserManager.GetUserId(User)" class="btn btn-primary">ADD TO CART</a>*@
-                        <form as-conroller="Home" asp-action="BasketItemDetail" method="Post">
+                        <form asp-controller="BasketItem" asp-action="BasketItemDetail" method="get">
                             <input type="hidden" name="appUserId" value="@UserManager.GetUserId(User)" />
                             <input type="hidden" name="productId" value="@item.Id" />
                             <button type="submit" class="btn btn-danger">Add To Cart</button>
