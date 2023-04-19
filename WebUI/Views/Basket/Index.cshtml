@@ -30,21 +30,27 @@
                         </td>
                     </tr>
                 }
+            <tr>
+                <td colspan="4">
+                    <a asp-action="" asp-controller="" asp-route-id="" class="btn btn-outline-info">Continue Shopping</a>
+                    <a asp-action="" asp-controller="" asp-route-id="" class="btn btn-outline-danger ms-2">Empty The Basket</a>
+
+                </td> 
+               
+            </tr>
             </table>
         </div>
         <div class="col-md-4">
             <table class="table">
                 <tbody>
-                    <tr>
-                        <tr><td>Order Summary</td> </tr>
-                        <tr><td>Total Quantity of Orders</td></tr>
-                        <tr><td>12 Product </td></tr>
-                        <tr><td>Total Order Amount</td></tr>
-                        <tr><td>122TL</td></tr>
-                        <tr><td><a class="btn btn-info">Confirm Order And Buy</a></td></tr>
-                    </tr>
+                    <tr><td><strong class="fs-4">Order Summary</strong></td> </tr>
+                    <tr><td><p class="fw-semibold text-danger fs-6"> Total Quantity of Orders (12 items) </p></td> </tr>
+                    <tr><td><p class="fw-semibold text-danger fs-6"> Subtotal: 122 TL</p></td></tr>
+                    
+                    <tr><td><a class="btn btn-outline-success">CONFIRM ORDER AND CHECKOUT</a></td></tr>
+                    
                 </tbody>
-                    </table>
+            </table>
 
         </div>
     </div>

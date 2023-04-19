@@ -26,7 +26,9 @@ namespace WebUI.Controllers
 
         public async Task<IActionResult> Index(string userId)
         {
+            
             var basket = await _basketService.GetBasketByUserId(userId);
+            var itemCount=await _basketItemService.GetBasketItemsCountByUserId(userId);
             var basketItems=await _basketItemService.GetBasketItemsWithProductByBasketId(basket.Id);
             return View(_mapper.Map<List<BasketItemVM>>(basketItems));
         }

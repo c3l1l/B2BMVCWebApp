@@ -1,15 +1,28 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Business.Services 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject BasketItemService basketItemService
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                Hello,
+                @{
+                    var userName = User.Identity.Name.Split('@');
+                    @userName[0].ToUpper();
+                }
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-action="Index" asp-controller="Basket" asp-route-userId="@UserManager.GetUserId(User)" >#Sepet#</a>
+            <a class="btn btn-primary" asp-action="Index" asp-controller="Basket" asp-route-userId="@UserManager.GetUserId(User)">
+                @{
+                    var itemcount = await basketItemService.GetBasketItemsCountByUserId(UserManager.GetUserId(User));
+                }
+                Shopping Basket<span class="badge bg-light text-black"> @itemcount</span>
+            </a>
         </li>
 
         <li class="nav-item">

@@ -12,5 +12,10 @@ namespace Core.Services
     {
         Task<bool> CheckBasketItemPropertiesOnDB(BasketItemVM basketItemVM);
         Task<List<BasketItemVM>> GetBasketItemsWithProductByBasketId(int basketId);
+
+        Task<int> GetBasketItemsCountByUserId(string userId);
+
+
+
     }
 }

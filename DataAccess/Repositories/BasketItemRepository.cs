@@ -19,5 +19,9 @@ namespace DataAccess.Repositories
         {
             return await _context.BasketItems.Include(x => x.Product).Where(x=>x.BasketId==basketId).ToListAsync();
         }
+        public async Task<int> GetBasketItemsCountByBasketId(int basketId)
+        {
+            return await _context.BasketItems.Where(x => x.BasketId == basketId).CountAsync();
+        }
     }
 }
