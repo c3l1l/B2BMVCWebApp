@@ -58,7 +58,7 @@
                         
                         </p></td></tr>
                     
-                    <tr><td><a class="btn btn-outline-success">CONFIRM ORDER AND CHECKOUT</a></td></tr>
+                    <tr><td><a class="btn btn-outline-success" asp-action="ConfirmOrder" asp-controller="Order" asp-route-basketId="@Model.FirstOrDefault().BasketId">CONFIRM ORDER AND CHECKOUT</a></td></tr>
                     
                 </tbody>
             </table>

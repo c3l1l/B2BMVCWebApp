@@ -20,6 +20,7 @@ namespace Business.Mapping
             CreateMap<PriceList,PriceListVM>().ReverseMap();    
             CreateMap<Customer,CustomerVM>().ReverseMap();  
             CreateMap<BasketItem, BasketItemVM>().ReverseMap();
+            CreateMap<Order, OrderVM>().ReverseMap();
 
         }
     }

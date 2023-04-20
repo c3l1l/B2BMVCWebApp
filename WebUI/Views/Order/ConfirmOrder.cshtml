@@ -1,0 +1,32 @@
+﻿@model OrderVM
+@{
+}
+order page
+:BasketId:@ViewBag.BasketId
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table ">
+                <tr>
+                    <th>Your Information</th>
+                    <th>ShippingAddress</th>
+                </tr>
+                <tr class="borderless-tr">
+                    <td class="borderless-tr">Your Information</td>
+                    <td class="borderless-tr">ShippingAddress</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section PageStyles{
+    <link href="~/css/pages/confirm-order.css" rel="stylesheet" />
+
+    @*<style>
+        .borderless-tr{
+            border:none;
+        }
+    </style>*@
+}
