@@ -1,0 +1,48 @@
+﻿
+@{
+}
+@model OrderVM
+@{
+}
+Order Review Page
+
+<div class="container border-1 mt-4">
+    <div class="row">
+        <div class="col">
+            <span class="fw-bolder"> Order Confirmation Review</span> <p class="float-end fs-6">Order Total: 3132.00 TL <a class="btn btn-success ">Place Order</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col border ">
+            <div class="table-responsive-md">
+                <table class="table m-3">
+                    <tr>
+                        <th class="w-50 ">Your Information <a class="float-end fs text-decoration-none fw-normal">Edit</a></th>
+                        <th class="w-50 ">Shipping Address <a class="float-end fs text-decoration-none fw-normal">Edit</a></th>
+                    </tr>
+                    <tr class="borderless-tr">
+                        <td class="borderless-tr">Celil ozturk celil@gmail.com</td>
+                        <td class="borderless-tr">
+                            Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Payment Type <a class="float-end fs text-decoration-none fw-normal">Edit</a></th>
+                        <th>Billing Address <a class="float-end fs text-decoration-none fw-normal">Edit</a></th>
+                    </tr>
+                    <tr class="borderless-tr">
+                        <td class="borderless-tr">Celil ozturk celil@gmail.com</td>
+                        <td class="borderless-tr">
+                            Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section PageStyles{
+    <link href="~/css/pages/confirm-order-review.css" rel="stylesheet" />
+
+}

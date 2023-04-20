@@ -1,50 +1,85 @@
-﻿@model OrderVM
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model OrderVM
 @{
+    decimal subtotal = 0;
+    decimal totalItemQuantity = 0;
 }
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <span class="">Enter your order details</span>
+            <form method="post" asp-controller="Order" asp-action="ConfirmOrder" name="orderInfo" class="my-4">
+                <div class="form-floating">
+                    <textarea asp-for="Address" class="form-control" required style="height: 100px"></textarea>
+                    <label asp-for="Address">Address</label>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
 
-<div class="container border-1 mt-4">
-    <div class="row">
-        <div class="col">
-            <span class="fw-bolder"> Order Confirmation Review</span> <p class="float-end fs-6">Order Total: 3132.00 TL <a class="btn btn-success ">Place Order</a></p>
+                <div class="mb-3">
+                    <label asp-for="@Model.City" class="form-label">City</label>
+                    <select asp-for="@Model.City" asp-items="@Html.GetEnumSelectList<Core.Models.Enums.City>()" class="form-select"></select>
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Payment Method</label>
+                    <select asp-for="@Model.PaymentMethod" asp-items="@Html.GetEnumSelectList<Core.Models.Enums.PaymentMethod>()" class="form-select">
+                        <option value="1">Bank Transfer</option>
+                    </select>
+                </div>
+                <input type="hidden" name="appUserId" value="@UserManager.GetUserId(User)" />
+            </form>
+
         </div>
-    </div>
-    <div class="row">
-        <div class="col border ">
-            <div class="table-responsive-md">
-                <table class="table m-3">
-                    <tr>
-                        <th class="w-50 ">Your Information <a class="float-end fs text-decoration-none fw-normal" >Edit</a></th>
-                        <th class="w-50 ">Shipping Address <a class="float-end fs text-decoration-none fw-normal">Edit</a></th>
-                    </tr>
+        <div class="col-md-4">
+            <table class="table m-4">
+                <tr>
+                    <th class="w-50 ">Shipping Summary Information</th>
+                </tr>
+                @foreach (var item in (List<BasketItemVM>)ViewBag.BasketItems)
+                {
+                        var price = item.Product.Price;
+                        var quantity = item.Quantity;
+                        var productTotalPrice = price * quantity;
+                        subtotal += productTotalPrice;
+                        totalItemQuantity += quantity;
+                  
+
                     <tr class="borderless-tr">
-                        <td class="borderless-tr">Celil ozturk celil@gmail.com</td>
+                        <td class="borderless-tr"><span class="fw-normal">@item.Product.Name </span>  </td>
                         <td class="borderless-tr">
-                            Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                            <span class="fw-bold">@productTotalPrice.ToString("0.00") TL</span>
                         </td>
                     </tr>
-                    <tr>
-                        <th>Payment Type <a class="float-end fs text-decoration-none fw-normal">Edit</a></th>
-                        <th>Billing Address <a class="float-end fs text-decoration-none fw-normal">Edit</a></th>
-                    </tr>
                     <tr class="borderless-tr">
-                        <td class="borderless-tr">Celil ozturk celil@gmail.com</td>
-                        <td class="borderless-tr">
-                            Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                        </td>
+                        <td colspan="2" class="borderless-tr"><span class="fw-light" style="font-size:12px; color:red">(@item.Product.Name ) x (@item.Quantity)</span> </td>
                     </tr>
-                </table>
-            </div>
+                }
+                <tr class="borderless-tr">
+                    <td class="borderless-tr">Urun 1</td>
+                </tr>
+                <tr>
+                    <th>Subtotal <span class="fw-normal" style="font-size:12px; color:indianred">(@totalItemQuantity.ToString("0") items)</span></th>
+                </tr>
+                <tr class="borderless-tr">
+                    <td class="borderless-tr">
+                        @subtotal
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary" onclick="document.forms['orderInfo'].submit()">Continue To Preview</button>
+                        <a asp-controller="Products" asp-action="Index" class="btn btn-warning text-secondary">Back</a>
+
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
 
 @section PageStyles{
-    <link href="~/css/pages/confirm-order.css" rel="stylesheet" />
-
-    @*<style>
-        .borderless-tr{
-            border:none;
-        }
-    </style>*@
+    <link href="~/css/pages/confirm-order-review.css" rel="stylesheet" />
 }

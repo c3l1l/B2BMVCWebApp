@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Models;
+using Core.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +10,11 @@ namespace Core.ViewModels
 {
     public class OrderVM:BaseVM
     {
-        public string AppUserId { get; set; }
-        public int CustomerId { get; set; }
-        public string OrderNumber { get; set; }
-        public DateTime Date { get; set; }
+        public string AppUserId { get; set; }        
+        
         public string Status { get; set; }
         public string Address { get; set; }
+        public City City { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }
