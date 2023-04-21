@@ -9,5 +9,6 @@ namespace Core.Services
 {
     public interface IOrderService:IGenericService<Order>
     {
+        Task<Order> GetLastOrder();
     }
 }

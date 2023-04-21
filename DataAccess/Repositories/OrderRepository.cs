@@ -1,6 +1,7 @@
 ﻿using Core.Models;
 using Core.Repositories;
 using DataAccess.DbContexts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace DataAccess.Repositories
     {
         public OrderRepository(AppDbContext context) : base(context)
         {
+        }
+
+        public async Task<Order> GetLastOrder()
+        {
+            return await _context.Orders.OrderBy(o => o.Id).LastOrDefaultAsync();
         }
     }
 }

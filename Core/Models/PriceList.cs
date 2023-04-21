@@ -11,6 +11,5 @@ namespace Core.Models
         public string Name { get; set; }
         public decimal Discount { get; set; }
         public List<Product> Products { get; set; }
-        public List<Customer> Customers { get; set; }
     }
 }

@@ -47,9 +47,23 @@ namespace Business.Services
 
         public async Task<int> GetBasketItemsCountByUserId(string userId)
         {
-            var basket=await _basketRepository.GetBasketByUserId(userId);
-            var itemCount = await _basketItemRepository.GetBasketItemsCountByBasketId(basket.Id);
-            return itemCount;
+            //var basket=await _basketRepository.GetBasketByUserId(userId);
+            //int itemCount = await _basketItemRepository.GetBasketItemsCountByBasketId(basket.Id);
+            try
+            {
+                var basket = await _basketRepository.GetBasketByUserId(userId);
+                if (basket!=null)
+                {
+                    int itemCount = await _basketItemRepository.GetBasketItemsCountByBasketId(basket.Id);
+                    return itemCount;
+                }
+               
+            }
+            catch (Exception)
+            {
+
+            }
+            return 0;
         }
 
     }

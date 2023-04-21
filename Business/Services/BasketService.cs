@@ -42,7 +42,6 @@ namespace Business.Services
 
             var newBasket = new Basket();
             newBasket.AppUserId = userId;
-            newBasket.CustomerId = 0;
             await _basketRepository.AddAsync(newBasket);
             await _unitOfWork.CommitAsync();
 

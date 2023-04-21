@@ -19,7 +19,7 @@
         <li class="nav-item">
             <a class="btn btn-warning" asp-action="Index" asp-controller="Basket" asp-route-userId="@UserManager.GetUserId(User)">
                 @{
-                    var itemcount = await basketItemService.GetBasketItemsCountByUserId(UserManager.GetUserId(User));
+                    int itemcount = await basketItemService.GetBasketItemsCountByUserId(UserManager.GetUserId(User));
                 }
                 <i class="fa-solid fa-cart-shopping fa-xl"></i>
                 <span class="badge bg-light text-black"> @itemcount</span>

@@ -18,8 +18,6 @@ namespace DataAccess.Configurations
             builder.Property(x => x.Status).IsRequired().HasMaxLength(200);
             builder.Property(x => x.OrderNumber).IsRequired().HasMaxLength(20);
             builder.Property(x => x.Address).IsRequired().HasMaxLength(200);
-            builder.Property(x => x.CustomerId).IsRequired();
-
         }
 
         

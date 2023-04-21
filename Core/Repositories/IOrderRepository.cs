@@ -9,5 +9,6 @@ namespace Core.Repositories
 {
     public interface IOrderRepository:IGenericRepository<Order>
     {
+        Task<Order> GetLastOrder();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Business.Helpers;
 using Business.Mapping;
 using Business.Services;
 using Core.Repositories;
@@ -18,6 +19,7 @@ namespace WebUI.Modules
         {
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            
 
             var webAssembly = Assembly.GetExecutingAssembly();
             var repoAssembly = Assembly.GetAssembly(typeof(AppDbContext)); //Herhangi bir dosya adi ile o dosyanin icinde bulundugu assembly alinir.

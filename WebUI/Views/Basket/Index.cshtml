@@ -1,8 +1,9 @@
 ﻿@using System.Text.RegularExpressions
 @model List<BasketItemVM>
-@{ 
+@{
     decimal subtotal = 0;
     decimal totalItemQuantity = 0;
+    var basketIdCheck = (Model.FirstOrDefault()==null)? 0 : Model.FirstOrDefault().BasketId;
 }
 <div class="container">
     <div class="row">
@@ -36,17 +37,17 @@
                         </td>
                     </tr>
                 }
-            <tr>
-                <td colspan="4">
-                    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info">Continue Shopping</a>
-                    
-                    @if (Model.Count >= 1)
-                    {
-                        <a asp-action="DeleteTheBasket" asp-controller="Basket" asp-route-id="@Model.FirstOrDefault().BasketId" class="btn btn-outline-danger ms-2">Empty The Basket</a>
-                    }
-                </td> 
-               
-            </tr>
+                <tr>
+                    <td colspan="4">
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info">Continue Shopping</a>
+
+                        @if (Model.Count >= 1)
+                        {
+                            <a asp-action="DeleteTheBasket" asp-controller="Basket" asp-route-id="@Model.FirstOrDefault().BasketId" class="btn btn-outline-danger ms-2">Empty The Basket</a>
+                        }
+                    </td>
+
+                </tr>
             </table>
         </div>
         <div class="col-md-4">
@@ -54,12 +55,17 @@
                 <tbody>
                     <tr><td><strong class="fs-4">Order Summary</strong></td> </tr>
                     <tr><td><p class="fw-semibold text-secondary fs-6"> Total Quantity of Orders: <span class="fw-bold">@Convert.ToInt32(totalItemQuantity) items </span>  </p></td> </tr>
-                    <tr><td><p class="fw-semibold text-secondary fs-6"> Subtotal: <span class="fw-bold">@subtotal.ToString("0.00") TL</span> 
-                        
-                        </p></td></tr>
-                    
-                    <tr><td><a class="btn btn-outline-success" asp-action="ConfirmOrder" asp-controller="Order" asp-route-basketId="@Model.FirstOrDefault().BasketId">CONFIRM ORDER AND CHECKOUT</a></td></tr>
-                    
+                    <tr>
+                        <td>
+                            <p class="fw-semibold text-secondary fs-6">
+                                Subtotal: <span class="fw-bold">@subtotal.ToString("0.00") TL</span>
+
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr><td><a class="btn btn-outline-success" asp-action="ConfirmOrder" asp-controller="Order" asp-route-basketId="@basketIdCheck">CONFIRM ORDER AND CHECKOUT</a></td></tr>
+
                 </tbody>
             </table>
 

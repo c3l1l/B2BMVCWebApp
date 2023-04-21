@@ -20,5 +20,10 @@ namespace Business.Services
             _orderRepository = orderRepository;
             _mapper = mapper;
         }
+
+        public Task<Order> GetLastOrder()
+        {
+            return _orderRepository.GetLastOrder();
+        }
     }
 }

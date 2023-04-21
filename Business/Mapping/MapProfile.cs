@@ -18,7 +18,6 @@ namespace Business.Mapping
             CreateMap<Category,CategoryVM>().ReverseMap();
             CreateMap<Product,ProductWithCategoryVM>().ReverseMap();
             CreateMap<PriceList,PriceListVM>().ReverseMap();    
-            CreateMap<Customer,CustomerVM>().ReverseMap();  
             CreateMap<BasketItem, BasketItemVM>().ReverseMap();
             CreateMap<Order, OrderVM>().ReverseMap();
 
