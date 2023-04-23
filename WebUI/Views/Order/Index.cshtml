@@ -1,5 +1,6 @@
 ﻿@model List<UserOrderVM>
 @{
+    int index = 0;
 }
 
 <div class="container">
@@ -7,19 +8,24 @@
         <div class="col">
             <table class="table table-striped">
                 <thead>
+                    <th>#</th>
                 <th>Order Number</th>
                 <th>Status</th>
                 <th>Date</th>
+                <th>Payment Method</th>
                 <th>Actions</th>
 
                 </thead>
                 <tbody>
                 @foreach (var userOrder in Model)
-                {
+                { 
                     <tr>
+                        <td>@(index+=1)</td>
                         <td>@userOrder.OrderNumber</td>
-                        <td>@userOrder.Status</td>
+                        <td class="text-info">@userOrder.Status</td>
                         <td>@userOrder.Date</td>
+                        <td>@userOrder.PaymentMethod</td>
+
                         <td>
                             <button class="btn btn-warning">Order Details</button>
                         </td>

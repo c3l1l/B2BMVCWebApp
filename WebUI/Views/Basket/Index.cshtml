@@ -1,9 +1,14 @@
 ﻿@using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.Identity
+@using Business.Services
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject BasketItemService basketItemService
 @model List<BasketItemVM>
 @{
     decimal subtotal = 0;
     decimal totalItemQuantity = 0;
-    var basketIdCheck = (Model.FirstOrDefault()==null)? 0 : Model.FirstOrDefault().BasketId;
+    var basketIdCheck = (Model.FirstOrDefault() == null) ? 0 : Model.FirstOrDefault().BasketId;
 }
 <div class="container">
     <div class="row">
@@ -43,7 +48,7 @@
 
                         @if (Model.Count >= 1)
                         {
-                            <a asp-action="DeleteTheBasket" asp-controller="Basket" asp-route-id="@Model.FirstOrDefault().BasketId" class="btn btn-outline-danger ms-2">Empty The Basket</a>
+                            <a asp-action="DeleteTheBasket" asp-controller="Basket" asp-route-id="" class="btn btn-outline-danger ms-2">Empty The Basket</a>
                         }
                     </td>
 
@@ -65,6 +70,8 @@
                     </tr>
 
                     <tr><td><a class="btn btn-outline-success" asp-action="ConfirmOrder" asp-controller="Order" asp-route-basketId="@basketIdCheck">CONFIRM ORDER AND CHECKOUT</a></td></tr>
+
+                    <tr><td><a class="btn btn-outline-warning" asp-action="Index" asp-controller="Order" asp-route-appUserId="@UserManager.GetUserId(User)">GO TO MY ORDERS</a></td></tr>
 
                 </tbody>
             </table>

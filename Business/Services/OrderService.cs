@@ -64,6 +64,7 @@ namespace Business.Services
                 return null;
             var order = _mapper.Map<Order>(orderVM);
             order.Status = "In Progress";
+            order.Status = DateTime.Now.ToString();
             order.OrderNumber = await Generate();
             await SaveOrderWithOrderItemsAsync(order);
             return order;

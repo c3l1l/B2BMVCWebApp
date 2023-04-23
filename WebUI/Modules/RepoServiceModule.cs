@@ -22,7 +22,7 @@ namespace WebUI.Modules
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
 
             var webAssembly = Assembly.GetExecutingAssembly();
-            var repoAssembly = Assembly.GetAssembly(typeof(AppDbContext)); //Herhangi bir dosya adi ile o dosyanin icinde bulundugu assembly alinir.
+            var repoAssembly = Assembly.GetAssembly(typeof(AppDbContext)); 
             var businessAssembly = Assembly.GetAssembly(typeof(MapProfile));
 
             builder.RegisterAssemblyTypes(webAssembly, repoAssembly, businessAssembly).Where(x => x.Name.EndsWith("Repository")).AsImplementedInterfaces().InstancePerLifetimeScope();

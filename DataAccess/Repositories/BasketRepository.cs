@@ -18,7 +18,6 @@ namespace DataAccess.Repositories
 
         public async Task<Basket> GetBasketByUserId(string userId)
         {
-           // return await _context.Baskets.FirstOrDefaultAsync(b => b.AppUserId == userId);
             return await _context.Baskets.Where(b=>b.AppUserId==userId).FirstOrDefaultAsync();
         }
     }
