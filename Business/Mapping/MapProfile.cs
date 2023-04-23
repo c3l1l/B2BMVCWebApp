@@ -21,6 +21,7 @@ namespace Business.Mapping
             CreateMap<BasketItem, BasketItemVM>().ReverseMap();
             CreateMap<Order, OrderVM>().ReverseMap();
             CreateMap<Order, UserOrderVM>().ReverseMap();
+            CreateMap<Order,OrderDetailVM>().ReverseMap();
 
         }
     }

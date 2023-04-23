@@ -1,0 +1,36 @@
+﻿@{ 
+
+}
+@model OrderDetailVM
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <th>Order Number</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Payment Method</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Actions</th>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>@Model.OrderNumber</td>
+                            <td class="text-info">@Model.Status</td>
+                            <td>@Model.Date</td>
+                            <td>@Model.PaymentMethod</td>
+                            <td>@Model.Address</td>
+                            <td>@Model.City</td>
+                            <td>
+                                @*<button class="btn btn-warning">Order Details</button>*@
+                                <a class="btn btn-warning" asp-action="OrderDetails" asp-controller="Order">Order Details</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

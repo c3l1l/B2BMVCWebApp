@@ -30,6 +30,11 @@ namespace WebUI.Controllers
 
             return View(_mapper.Map<List<UserOrderVM>>(userOrders));
         }
+        public async Task<IActionResult> OrderDetail(int orderId)
+        {
+            var order=await _orderService.GetByIdAsync(orderId);
+            return View(_mapper.Map<OrderDetailVM>(order));
+        }
         public async Task<IActionResult> ConfirmOrder(int basketId)
         {
             var basketItems = await _basketItemService.GetBasketItemsWithProductByBasketId(basketId);    
@@ -40,15 +45,6 @@ namespace WebUI.Controllers
                 PaymentMethod = PaymentMethod.BankTransfer
             };
             return View(orderVm);
-        }
-        [HttpPost]
-        public async Task<IActionResult> ConfirmOrder(OrderVM orderVM)
-        {
-            var order=await _orderService.CheckAndCreateOrder(orderVM);
-            if (order!=null) {
-                return RedirectToAction(nameof(Index), nameof(Order), new { appUserId = order.AppUserId });
-            }          
-            return  RedirectToAction(nameof(OrderError));
         }
         
         public async Task<IActionResult> ConfirmOrderReview(OrderVM orderVM)

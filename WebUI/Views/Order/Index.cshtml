@@ -8,7 +8,7 @@
         <div class="col">
             <table class="table table-striped">
                 <thead>
-                    <th>#</th>
+                 <th>#</th>
                 <th>Order Number</th>
                 <th>Status</th>
                 <th>Date</th>
@@ -27,7 +27,8 @@
                         <td>@userOrder.PaymentMethod</td>
 
                         <td>
-                            <button class="btn btn-warning">Order Details</button>
+                            @*<button class="btn btn-warning">Order Details</button>*@
+                            <a class="btn btn-warning" asp-action="OrderDetail" asp-controller="Order" asp-route-orderId="@userOrder.Id">Order Details</a>
                         </td>
                     </tr>
                 }
