@@ -60,13 +60,25 @@ namespace WebUI.Controllers
             {
                 return RedirectToAction(nameof(Index), nameof(Order), new { appUserId = order.AppUserId });
             }
-            return RedirectToAction(nameof(OrderError));
+            return OrderError(new OrderErrorVM { Message="Something Went Wrong !!"});
            // return View(orderVM);
         }
-
-        public IActionResult OrderError()
+        [HttpGet]
+        public async Task<IActionResult> CancelOrder(int orderId,string appUserId)
         {
-            return View();
+            var order = await _orderService.GetByIdAsync(orderId);
+            if (order.Status=="In Progress")
+            {
+                await _orderService.RemoveAsync(order);
+                return RedirectToAction(nameof(Index),new { appUserId=appUserId });
+            }
+
+            return OrderError(new OrderErrorVM() { Message = $"({order.OrderNumber}) order cannot cancel ! " }); 
+        }
+
+        public IActionResult OrderError(OrderErrorVM orderErrorVM)
+        {
+            return View(orderErrorVM);
         }
     }
 }

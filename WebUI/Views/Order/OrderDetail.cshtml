@@ -1,5 +1,5 @@
 ﻿@{ 
-
+    
 }
 @model OrderDetailVM
 
@@ -25,8 +25,8 @@
                             <td>@Model.Address</td>
                             <td>@Model.City</td>
                             <td>
-                                @*<button class="btn btn-warning">Order Details</button>*@
-                                <a class="btn btn-warning" asp-action="OrderDetails" asp-controller="Order">Order Details</a>
+                                <a class="btn btn-warning" asp-action="CancelOrder" asp-controller="Order" asp-route-orderId="@Model.Id" asp-route-appUserId="@Model.AppUserId">Cancel Order</a>
+                                @*<a class="btn btn-warning" asp-action="CancelOrder" asp-controller="Order" asp-route-*="new {orderId=@Model.Id}, {appUserId=@Model.AppUserId };" >Cancel Order</a>*@
                             </td>
                         </tr>
                 </tbody>
