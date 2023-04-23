@@ -24,10 +24,11 @@ namespace WebUI.Controllers
             _orderNumberService = orderNumberService;
         }
 
-        public IActionResult Index(int basketId)
+        public async Task<IActionResult> Index(string appUserId)
         {
-            ViewBag.BasketId = basketId;
-            return View();
+            var userOrders= await _orderService.Where(o => o.AppUserId == appUserId).ToListAsync();
+
+            return View(_mapper.Map<List<UserOrderVM>>(userOrders));
         }
         public async Task<IActionResult> ConfirmOrder(int basketId)
         {
@@ -45,7 +46,8 @@ namespace WebUI.Controllers
         {
             var order=await CheckAndCreateOrder(orderVM);
             await _orderService.AddAsync(order);
-             return RedirectToAction("Index");
+            await _basketItemService.RemoveBasketItemsFromBasket(order.AppUserId);
+             return RedirectToAction(nameof(Index),nameof(Order),new {appUserId=order.AppUserId});
             
         }
         public IActionResult ConfirmOrderReview(int basketId)
@@ -57,18 +59,14 @@ namespace WebUI.Controllers
         [NonAction]
         public async Task<Order> CheckAndCreateOrder(OrderVM orderVM)
         {
-            if (orderVM.Address == null || orderVM.Address == "")
-                 RedirectToAction("OrderError");          
-            if (orderVM.City == null)
-                RedirectToAction("OrderError");
-            if (orderVM.PaymentMethod == null )
-                RedirectToAction("OrderError");
-           var order= _mapper.Map<Order>(orderVM);
+            if (orderVM.Address == null || orderVM.Address == "" || orderVM.City == null || orderVM.PaymentMethod == null)
+                 RedirectToAction(nameof(OrderError));
+            var order= _mapper.Map<Order>(orderVM);
             order.Status = "In Progress";
              order.OrderNumber=await _orderNumberService.Generate();           
             return order;
         }
-        private IActionResult OrderError()
+        public IActionResult OrderError()
         {
             return View();
         }

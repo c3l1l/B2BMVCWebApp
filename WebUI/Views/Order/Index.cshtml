@@ -1,6 +1,32 @@
-﻿@model OrderVM
+﻿@model List<UserOrderVM>
 @{
 }
 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <th>Order Number</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
 
-    MY ORDERS
+                </thead>
+                <tbody>
+                @foreach (var userOrder in Model)
+                {
+                    <tr>
+                        <td>@userOrder.OrderNumber</td>
+                        <td>@userOrder.Status</td>
+                        <td>@userOrder.Date</td>
+                        <td>
+                            <button class="btn btn-warning">Order Details</button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

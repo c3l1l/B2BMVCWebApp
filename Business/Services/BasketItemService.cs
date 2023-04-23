@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Services
 {
@@ -64,6 +65,15 @@ namespace Business.Services
 
             }
             return 0;
+        }
+
+        public async Task RemoveBasketItemsFromBasket(string appUserId)
+        {
+            var basket = await _basketRepository.GetBasketByUserId(appUserId);
+            
+            var basketItems = await _basketItemRepository.Where(b => b.BasketId == basket.Id).ToListAsync();
+             _basketItemRepository.RemoveRange(basketItems);
+             await _unitOfWork.CommitAsync();
         }
 
     }

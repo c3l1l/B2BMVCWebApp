@@ -14,6 +14,7 @@ namespace Core.Services
         Task<List<BasketItemVM>> GetBasketItemsWithProductByBasketId(int basketId);
 
         Task<int> GetBasketItemsCountByUserId(string userId);
+        Task RemoveBasketItemsFromBasket(string appUserId);
 
 
 
