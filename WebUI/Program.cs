@@ -15,6 +15,8 @@ using Business.Services;
 using Core.UnitOfWorks;
 using DataAccess.UnitOfWork;
 using WEBUI.Filters;
+using Core.Helpers;
+using Business.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +28,7 @@ builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository
 builder.Services.AddScoped(typeof(IGenericService<>),typeof(GenericService<>));
 //builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProductService, ProductService>();  
-builder.Services.AddScoped<IProductRepository, ProductRepository>();  
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 
 

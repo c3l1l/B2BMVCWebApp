@@ -14,14 +14,14 @@ namespace WebUI.Controllers
         private readonly IOrderService _orderService;
         private readonly IBasketItemService _basketItemService;
         private readonly IMapper _mapper;
-        private readonly IOrderNumberService _orderNumberService;
+        private readonly IOrderItemService _orderItemService;
 
-        public OrderController(IOrderService orderService, IMapper mapper, IBasketItemService basketItemService, IOrderNumberService orderNumberService)
+        public OrderController(IOrderService orderService, IMapper mapper, IBasketItemService basketItemService, IOrderItemService orderItemService)
         {
             _orderService = orderService;
             _mapper = mapper;
             _basketItemService = basketItemService;
-            _orderNumberService = orderNumberService;
+            _orderItemService = orderItemService;
         }
 
         public async Task<IActionResult> Index(string appUserId)
@@ -44,28 +44,18 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> ConfirmOrder(OrderVM orderVM)
         {
-            var order=await CheckAndCreateOrder(orderVM);
-            await _orderService.AddAsync(order);
-            await _basketItemService.RemoveBasketItemsFromBasket(order.AppUserId);
-             return RedirectToAction(nameof(Index),nameof(Order),new {appUserId=order.AppUserId});
-            
+            var order=await _orderService.CheckAndCreateOrder(orderVM);
+            if (order!=null) {
+                return RedirectToAction(nameof(Index), nameof(Order), new { appUserId = order.AppUserId });
+            }          
+            return  RedirectToAction(nameof(OrderError));
         }
         public IActionResult ConfirmOrderReview(int basketId)
         {
             ViewBag.BasketId = basketId;
             return View();
         }
-
-        [NonAction]
-        public async Task<Order> CheckAndCreateOrder(OrderVM orderVM)
-        {
-            if (orderVM.Address == null || orderVM.Address == "" || orderVM.City == null || orderVM.PaymentMethod == null)
-                 RedirectToAction(nameof(OrderError));
-            var order= _mapper.Map<Order>(orderVM);
-            order.Status = "In Progress";
-             order.OrderNumber=await _orderNumberService.Generate();           
-            return order;
-        }
+       
         public IActionResult OrderError()
         {
             return View();

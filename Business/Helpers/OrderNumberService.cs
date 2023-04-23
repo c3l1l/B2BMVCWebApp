@@ -18,10 +18,7 @@ namespace Business.Helpers
             _orderService = orderService;
         }
 
-        public async Task<string> Get()
-        {
-            return null;
-        }
+     
         public async Task<string> Generate()
         {
             var order = await _orderService.GetLastOrder();
