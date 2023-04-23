@@ -50,12 +50,24 @@ namespace WebUI.Controllers
             }          
             return  RedirectToAction(nameof(OrderError));
         }
-        public IActionResult ConfirmOrderReview(int basketId)
-        {
-            ViewBag.BasketId = basketId;
-            return View();
+        
+        public async Task<IActionResult> ConfirmOrderReview(OrderVM orderVM)
+        {        
+            return View(orderVM);
         }
-       
+        [AutoValidateAntiforgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> ConfirmOrderReviewAndSave(OrderVM orderVM)
+        {
+            var order = await _orderService.CheckAndCreateOrder(orderVM);
+            if (order != null)
+            {
+                return RedirectToAction(nameof(Index), nameof(Order), new { appUserId = order.AppUserId });
+            }
+            return RedirectToAction(nameof(OrderError));
+           // return View(orderVM);
+        }
+
         public IActionResult OrderError()
         {
             return View();

@@ -29,6 +29,7 @@ builder.Services.AddScoped(typeof(IGenericService<>),typeof(GenericService<>));
 //builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProductService, ProductService>();  
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<BasketService>();
 
 
 
