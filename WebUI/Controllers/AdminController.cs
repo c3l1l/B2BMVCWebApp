@@ -35,7 +35,14 @@ namespace WebUI.Controllers
         public async Task<IActionResult> ConfirmOrder(int orderId)
         {
             var order=await _orderService.GetByIdAsync(orderId);
+            _orderService.ChangeOrderStatus(order);
            return RedirectToAction(nameof(OrderDetail), new {orderId=orderId});
+        }
+        public async Task<IActionResult> CancelOrder(int orderId)
+        {
+            var order = await _orderService.GetByIdAsync(orderId);
+            await _orderService.CancelOrder(order);
+            return RedirectToAction(nameof(OrderDetail),new {orderId=orderId});
         }
 
     }

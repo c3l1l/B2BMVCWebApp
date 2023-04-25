@@ -114,5 +114,16 @@ namespace Business.Services
             _unitOfWork.Commit();
             return order;
         }
+
+        public async Task<Order> CancelOrder(Order order)
+        {
+            if (order.Status==Status.InProgress)
+            {
+                order.Status = Status.Cancelled;
+            }
+            _orderRepository.Update(order);
+            _unitOfWork.Commit();
+            return order;
+        }  
     }
 }

@@ -16,6 +16,8 @@ namespace Core.Services
         Task<List<Order>> GetOrdersWithUser();
         Task<Order> GetOrderWithOrderItemsByOrderId(int orderId);
         Task<Order> ChangeOrderStatus(Order order);
+        Task<Order> CancelOrder(Order order);
+       
 
     }
 }
