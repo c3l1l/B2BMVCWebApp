@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Helpers;
 using Core.Models;
+using Core.Models.Enums;
 using Core.Repositories;
 using Core.Services;
 using Core.UnitOfWorks;
@@ -63,7 +64,7 @@ namespace Business.Services
             if (orderVM.Address == null || orderVM.Address == "" || orderVM.City == null || orderVM.PaymentMethod == null)
                 return null;
             var order = _mapper.Map<Order>(orderVM);
-            order.Status = "In Progress";
+            order.Status = Status.InProgress;
             order.Date = DateTime.Now;
             order.OrderNumber = await Generate();
             await SaveOrderWithOrderItemsAsync(order);
@@ -98,9 +99,20 @@ namespace Business.Services
             return await _orderRepository.GetOrderWithOrderItemsByOrderId(orderId);
         }
 
-        public Task<Order> ChangeOrderStatus(Order order)
+        public async Task<Order> ChangeOrderStatus(Order order)
         {
-            return null;
+            switch (order.Status)
+            {
+                case Status.InProgress: order.Status = Status.Confirmed;
+                    break;
+                case Status.Confirmed: order.Status = Status.Shipped;
+                    break;  
+                default:
+                    break;
+            }
+             _orderRepository.Update(order);
+            _unitOfWork.Commit();
+            return order;
         }
     }
 }

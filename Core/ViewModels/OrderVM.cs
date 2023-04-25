@@ -13,7 +13,7 @@ namespace Core.ViewModels
     {
         public string AppUserId { get; set; }        
         
-        public string Status { get; set; }
+        public Status Status { get; set; }
         public string Address { get; set; }
         public City City { get; set; }
         public PaymentMethod PaymentMethod { get; set; }

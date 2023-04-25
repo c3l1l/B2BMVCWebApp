@@ -67,7 +67,7 @@ namespace WebUI.Controllers
         public async Task<IActionResult> CancelOrder(int orderId,string appUserId)
         {
             var order = await _orderService.GetByIdAsync(orderId);
-            if (order.Status=="In Progress")
+            if (order.Status==Status.InProgress)
             {
                 await _orderService.RemoveAsync(order);
                 return RedirectToAction(nameof(Index),new { appUserId=appUserId });

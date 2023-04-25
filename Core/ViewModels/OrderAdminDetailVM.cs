@@ -12,7 +12,7 @@ namespace Core.ViewModels
     {
         public string AppUserId { get; set; }
         public string OrderNumber { get; set; }
-        public string Status { get; set; }
+        public Status Status { get; set; }
         public DateTime Date { get; set; }
         public string Address { get; set; }
         public City City { get; set; }

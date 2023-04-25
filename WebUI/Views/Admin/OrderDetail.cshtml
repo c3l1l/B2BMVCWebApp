@@ -30,7 +30,7 @@
                         <td>@Model.Address</td>
                         <td>@Model.City</td>
                         <td>
-                            <a class="btn btn-success" asp-action="ConfirmOrder" asp-controller="Admin" asp-route-orderId="@Model.Id" asp-route-appUserId="@Model.AppUserId">Confirm Order</a>
+                            <a class="btn btn-success" asp-action="ConfirmOrder" asp-controller="Admin" asp-route-orderId="@Model.Id" >Confirm Order</a>
                             <a class="btn btn-danger" asp-action="CancelOrder" asp-controller="Order" asp-route-orderId="@Model.Id" asp-route-appUserId="@Model.AppUserId">Cancel Order</a>
                         </td>
 

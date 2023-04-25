@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-    [Authorize(Roles ="admin")]
+   // [Authorize(Roles ="admin")]
     public class AdminController : Controller
     {
         private readonly IOrderService _orderService;
@@ -35,7 +35,7 @@ namespace WebUI.Controllers
         public async Task<IActionResult> ConfirmOrder(int orderId)
         {
             var order=await _orderService.GetByIdAsync(orderId);
-            return null;
+           return RedirectToAction(nameof(OrderDetail), new {orderId=orderId});
         }
 
     }
