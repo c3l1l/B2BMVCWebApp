@@ -13,5 +13,9 @@ namespace Core.Services
         Task<Order> GetLastOrder();
         Task SaveOrderWithOrderItemsAsync(Order order);
         Task<Order> CheckAndCreateOrder(OrderVM orderVM);
+        Task<List<Order>> GetOrdersWithUser();
+        Task<Order> GetOrderWithOrderItemsByOrderId(int orderId);
+        Task<Order> ChangeOrderStatus(Order order);
+
     }
 }

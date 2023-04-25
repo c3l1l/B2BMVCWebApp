@@ -20,5 +20,19 @@ namespace DataAccess.Repositories
         {
             return await _context.Orders.OrderBy(o => o.Id).LastOrDefaultAsync();
         }
+
+        public async Task<List<Order>> GetOrdersWithUser()
+        {
+            // var orders= await _context.Orders.Include(x=>x.AppUser).ToListAsync();
+            return await _context.Orders.ToListAsync();
+             
+        }
+
+        public async Task<Order> GetOrderWithOrderItemsByOrderId(int orderId)
+        {
+           // var order=await _context.Orders.Include(o=>o.OrderItems).Where(o=>o.Id==orderId).ToListAsync();
+            var order=await _context.Orders.Where(o => o.Id == orderId).Include(o=>o.OrderItems).ThenInclude(o=>o.Product).FirstOrDefaultAsync();
+            return order;
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace Core.Repositories
     public interface IOrderRepository:IGenericRepository<Order>
     {
         Task<Order> GetLastOrder();
+        Task<List<Order>> GetOrdersWithUser();
+        Task<Order> GetOrderWithOrderItemsByOrderId(int orderId);
     }
 }

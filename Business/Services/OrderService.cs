@@ -88,5 +88,19 @@ namespace Business.Services
             return "ON000000000000000001";
         }
 
+        public async Task<List<Order>> GetOrdersWithUser()
+        {
+            return await _orderRepository.GetOrdersWithUser();
+        }
+
+        public async Task<Order> GetOrderWithOrderItemsByOrderId(int orderId)
+        {
+            return await _orderRepository.GetOrderWithOrderItemsByOrderId(orderId);
+        }
+
+        public Task<Order> ChangeOrderStatus(Order order)
+        {
+            return null;
+        }
     }
 }

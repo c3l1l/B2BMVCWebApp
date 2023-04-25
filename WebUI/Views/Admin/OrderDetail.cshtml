@@ -1,0 +1,81 @@
+﻿@{
+    decimal totalPrice = 0;
+    decimal subTotal = 0;
+    
+}
+@model OrderAdminDetailVM
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Payment Method</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Actions</th>
+                    </tr>
+               
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.OrderNumber</td>
+                        <td class="text-info">@Model.Status</td>
+                        <td>@Model.Date</td>
+                        <td>@Model.PaymentMethod</td>
+                        <td>@Model.Address</td>
+                        <td>@Model.City</td>
+                        <td>
+                            <a class="btn btn-success" asp-action="ConfirmOrder" asp-controller="Admin" asp-route-orderId="@Model.Id" asp-route-appUserId="@Model.AppUserId">Confirm Order</a>
+                            <a class="btn btn-danger" asp-action="CancelOrder" asp-controller="Order" asp-route-orderId="@Model.Id" asp-route-appUserId="@Model.AppUserId">Cancel Order</a>
+                        </td>
+
+                    </tr>
+                   
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-light mt-4">
+                <thead>
+                    <tr>
+                        <th colspan="4">Product Details</th>
+                    </tr>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Quantity</th>
+                        <th>Product Price</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    @foreach (var orderItem in Model.OrderItems)
+                    {
+                        totalPrice += orderItem.Quantity * orderItem.Price;
+                        subTotal += totalPrice;
+                        <tr>
+                            <td>@orderItem.Product.Name</td>
+                            <td>@orderItem.Quantity.ToString("0") Item</td>
+                            <td>@orderItem.Price.ToString("0.00") TL</td>                           
+                            <td>
+                                Total Price:<span class="fw-bold">@totalPrice.ToString("0.00") TL</span> 
+                            </td>
+                        </tr>
+                    }
+                    
+                <tr>
+                    <td colspan="4" class="text-danger"><span class="fw-bold float-end">Subtotal: @subTotal.ToString("0.00") TL</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
