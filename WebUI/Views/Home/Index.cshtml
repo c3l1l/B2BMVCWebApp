@@ -12,11 +12,21 @@
             @foreach (var item in Model)
             {
                 <div class="card float-md-start mx-3 my-3" style="width: 18rem;">
-                    <img src="images/olives.jpg" class="card-img-top" alt="...">
+                    @{
+                        if (item.ProductImages.Count > 0)
+                        {
+                            <img src="~/images/products/@item.ProductImages[0].ImageUrl" class="card-img-top" alt="...">
+                        }
+                        else
+                        {
+                            <img src="~/images/products/no-image.jpg" class="card-img-top" alt="...">
+                        }
+
+                    }
                     <div class="card-body ">
                         <h5 class="card-title">@item.Name</h5>
                         <p class="card-text">@item.Price.ToString("0.00") TL</p>
-                       
+
                         <form asp-controller="Basket" asp-action="AddProductToBasket" method="get">
                             <input type="hidden" name="appUserId" value="@UserManager.GetUserId(User)" />
                             <input type="hidden" name="productId" value="@item.Id" />
@@ -24,7 +34,7 @@
                         </form>
                     </div>
                 </div>
-                
+
             }
         </div>
     </div>

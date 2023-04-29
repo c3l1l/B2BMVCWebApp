@@ -25,8 +25,8 @@ namespace WebUI.Controllers
 
         public async Task<IActionResult> Index()
         {
-
-            return View(await _productService.GetProductsWithCategory());
+            var products = await _productService.GetProductsWithCategory();
+            return View(products);
             //return View();
         }
 

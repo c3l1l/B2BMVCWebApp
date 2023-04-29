@@ -18,7 +18,7 @@ namespace DataAccess.Repositories
 
         public async Task<List<Product>> GetProductsWithCategory()
         {
-            return await _context.Products.Include(x=>x.Category).ToListAsync();
+            return await _context.Products.Include(x=>x.Category).Include(x=>x.ProductImages).ToListAsync();
         }
     }
 }
