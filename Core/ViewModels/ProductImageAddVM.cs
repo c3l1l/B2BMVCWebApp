@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace Core.ViewModels
 {
-    public class ProductImageVM:ProductImage
+    public class ProductImageAddVM:ProductImage
     {
+        public IFormFile[] Images { get; set; }
+
     }
 }

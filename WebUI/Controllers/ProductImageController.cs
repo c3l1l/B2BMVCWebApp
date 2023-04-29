@@ -29,14 +29,14 @@ namespace WebUI.Controllers
          var product=await _productService.GetByIdAsync(productId);
             if (product != null)
             {
-            var productImageVM=new ProductImageVM();
+            var productImageVM=new ProductImageAddVM();
                 productImageVM.ProductId=productId;
             return View(productImageVM);
             }
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<IActionResult> Save([FromForm] ProductImageVM productImageVM )
+        public async Task<IActionResult> Save([FromForm] ProductImageAddVM productImageVM )
         {
             await _productImageService.SaveProductImageToDb(productImageVM);
             return RedirectToAction("Index");

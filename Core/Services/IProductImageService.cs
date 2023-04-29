@@ -10,6 +10,6 @@ namespace Core.Services
 {
     public interface IProductImageService:IGenericService<ProductImage>
     {
-        Task SaveProductImageToDb(ProductImageVM productImageVM);
+        Task SaveProductImageToDb(ProductImageAddVM productImageVM);
     }
 }

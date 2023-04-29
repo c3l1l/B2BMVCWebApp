@@ -26,11 +26,12 @@ namespace Business.Services
             _fileService = fileService;
         }
 
-        public async Task SaveProductImageToDb(ProductImageVM productImageVM)
+        public async Task SaveProductImageToDb(ProductImageAddVM productImageVM)
         {
             foreach (var image in productImageVM.Images)
             {
                 var fileName=await  _fileService.FileSaveToServer(image,"wwwroot/images/products/");
+                //Mapping manually
                 ProductImage productImage = new()
                 {
                     Id = 0,
