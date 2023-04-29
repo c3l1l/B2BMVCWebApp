@@ -43,5 +43,11 @@ namespace Business.Services
                 await _unitOfWork.CommitAsync();
             }
         }
+        public async Task DeleteProductImageToDb(ProductImage productImage)
+        {
+            await _fileService.FileDeleteToServer(productImage.ImageUrl, "wwwroot/images/products/");
+             _productImageRepository.Remove(productImage);
+            await _unitOfWork.CommitAsync();
+        }
     }
 }

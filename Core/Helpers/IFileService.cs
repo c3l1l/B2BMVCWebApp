@@ -9,7 +9,7 @@ namespace Core.Helpers
 {
     public interface IFileService
     {
-        public Task<string> FileSaveToServer(IFormFile file, string filePath);
-
+        Task<string> FileSaveToServer(IFormFile file, string filePath);
+        Task FileDeleteToServer(string filename, string path);
     }
 }

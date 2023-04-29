@@ -11,5 +11,6 @@ namespace Core.Services
     public interface IProductImageService:IGenericService<ProductImage>
     {
         Task SaveProductImageToDb(ProductImageAddVM productImageVM);
+        Task DeleteProductImageToDb(ProductImage productImage);
     }
 }

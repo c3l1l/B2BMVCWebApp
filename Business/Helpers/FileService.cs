@@ -43,5 +43,19 @@ namespace Business.Helpers
             }
             return strNewFileName;
         }
+        public async Task FileDeleteToServer(string filename,string path)
+        {
+            var newFilePath=path + filename;
+            try
+            {
+                if (System.IO.File.Exists(newFilePath))
+                {
+                    System.IO.File.Delete(newFilePath);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }
