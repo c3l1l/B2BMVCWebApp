@@ -22,10 +22,19 @@
                             <div class="card">
                                 <img src="~/images/products/@productImage.ImageUrl" style="width: 200px; height:200px;" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">
+                                    <div class="d-grid gap-2">
                                         <a asp-action="Delete" asp-controller="ProductImage" asp-route-id="@productImage.Id" class="btn btn-danger">Delete</a>
-                                    </h5>
-                                    <a href="#" class="btn btn-primary">Set Main Image</a>
+                                        @{
+                                            if (productImage.IsMainImage)
+                                            {
+                                                <a disable class="btn btn-success">Main Image</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-action="SetMainImage" asp-controller="ProductImage" asp-route-id="@productImage.Id" class="btn btn-primary">Set Main Image</a>
+                                            }
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>

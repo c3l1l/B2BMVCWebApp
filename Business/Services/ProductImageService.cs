@@ -6,6 +6,7 @@ using Core.Services;
 using Core.UnitOfWorks;
 using Core.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,18 @@ namespace Business.Services
             await _fileService.FileDeleteToServer(productImage.ImageUrl, "wwwroot/images/products/");
              _productImageRepository.Remove(productImage);
             await _unitOfWork.CommitAsync();
+        }
+        public async Task SetMainImage(ProductImage productImage)
+        {
+            await SetAllImagesFalse(productImage.ProductId);
+            productImage.IsMainImage = true;
+            _productImageRepository.Update(productImage);
+            await _unitOfWork.CommitAsync();
+        }
+        private async Task SetAllImagesFalse(int productId)
+        {
+            var productImages = await _productImageRepository.Where(p => p.ProductId == productId).ToListAsync();
+            productImages.ForEach(productImage => { productImage.IsMainImage = false; });
         }
     }
 }

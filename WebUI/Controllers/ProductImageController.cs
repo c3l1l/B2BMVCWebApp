@@ -58,7 +58,13 @@ namespace WebUI.Controllers
                
                await _productImageService.DeleteProductImageToDb(productImage);
             }
-            return RedirectToAction(nameof(Index),productImage.ProductId);
+            return RedirectToAction(nameof(Index), new { productId = productImage.ProductId });
+        }
+        public async Task<IActionResult> SetMainImage(int id)
+        {
+            var productImage = await _productImageService.GetByIdAsync(id);
+            await _productImageService.SetMainImage(productImage);
+            return RedirectToAction(nameof(Index), new {productId= productImage.ProductId });
         }
     }
 }

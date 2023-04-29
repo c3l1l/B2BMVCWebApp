@@ -12,5 +12,6 @@ namespace Core.Services
     {
         Task SaveProductImageToDb(ProductImageAddVM productImageVM);
         Task DeleteProductImageToDb(ProductImage productImage);
+        Task SetMainImage(ProductImage productImage);
     }
 }
