@@ -15,7 +15,7 @@
                     @{
                         if (item.ProductImages.Count > 0)
                         {
-                            <img src="~/images/products/@item.ProductImages[0].ImageUrl" class="card-img-top" alt="...">
+                            <img src="~/images/products/@item.ProductImages.Find(i=>i.IsMainImage==true).ImageUrl" class="card-img-top" alt="...">
                         }
                         else
                         {
