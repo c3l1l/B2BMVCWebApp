@@ -1,0 +1,27 @@
+﻿@model ProductImageVM
+@{ 
+    
+}
+
+<h4>Save Product</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <form method="post" asp-controller="ProductImage" enctype="multipart/form-data" asp-action="Save">
+                <div class="mb-3">
+                    <label for="productImageFileMultiple" class="form-label">Product Images</label>
+                    <input class="form-control" type="file" asp-for="Images" id="productImageFileMultiple" multiple>
+                </div>
+                <div class="mb-3">
+                    <input type="hidden" asp-for="ProductId" id="productName" >
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+               
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-controller="ProductImage" asp-action="Index" class="btn btn-primary">Back</a>
+
+            </form>
+        </div>
+    </div>
+</div>

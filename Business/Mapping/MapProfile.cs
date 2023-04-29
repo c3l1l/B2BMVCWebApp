@@ -24,6 +24,7 @@ namespace Business.Mapping
             CreateMap<Order,OrderDetailVM>().ReverseMap();
             CreateMap<Order,OrderAdminVM>().ReverseMap();
             CreateMap<Order,OrderAdminDetailVM>().ReverseMap();
+            CreateMap<ProductImage,ProductImageVM>().ReverseMap();
 
         }
     }
